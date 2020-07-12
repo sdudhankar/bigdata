@@ -7,7 +7,7 @@ object GetRevenuePerOrder {
     val conf = new SparkConf().setMaster(args(0)).setAppName("Get Revenue Per Order")
     val sc = new SparkContext(conf)
     sc.setLogLevel("ERROR")
-    val revenue = sc.textFile("F:\\Spark\\data\\data-master\\data-master\\retail_db\\order_items\\part-00000")
+    val revenue = sc.textFile(args(1)) //your input file location
       .map(line=>(line.split(",")(1).toInt,line.split(",")(4).toFloat))
       .reduceByKey(_+_).sortByKey()
 
